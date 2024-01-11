@@ -16,7 +16,7 @@ struct ProjectUser {
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    if args.len() != 6 {
+    if args.len() != 3 {
         println!(
             "Usage: {} <list_of_students.csv> <token_file>",
             args.first().unwrap()
@@ -27,9 +27,9 @@ fn main() {
         );
         return;
     }
-    let token = read_token_file(args.get(5).unwrap());
+    let token = read_token_file(args.get(2).unwrap());
 
-    let students = parse_csv_file(args.get(4).unwrap());
+    let students = parse_csv_file(args.get(1).unwrap());
     let client = Gitlab::new(String::from(UW_GITLAB_URL), token).unwrap();
     verify_students(client, students)
 }
